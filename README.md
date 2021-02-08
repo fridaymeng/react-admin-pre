@@ -1,3 +1,5 @@
+# 项目使用了自动代码格式化工具 pretty-quick
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
