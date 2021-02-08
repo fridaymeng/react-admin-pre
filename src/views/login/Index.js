@@ -7,7 +7,7 @@ const NormalLoginForm = () => {
   const history = useHistory();
   const onFinish = (values) => {
     history.push("/app/list")
-    console.log('Received values of form: ', values);
+    console.log('values: ', values);
   };
 
   return (
