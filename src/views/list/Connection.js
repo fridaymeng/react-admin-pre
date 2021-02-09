@@ -21,21 +21,22 @@ class GenerateDiagram extends Component {
     this.sortByClick = this.sortByClick.bind(this);
   }
   componentDidMount() {
+    const width =
+      document.body.clientWidth -
+      Number.parseInt(
+        document.querySelector(".ant-layout-sider").style["width"]
+      ) -
+      50;
     this.setState({
-      width:
-        document.body.clientWidth -
-        Number.parseInt(
-          document.querySelector(".ant-layout-sider").style["width"]
-        ) -
-        50,
+      width,
       items: [
         {
           id: uuid(16, 16),
           type: "table", //表，过滤组件，关联组件，透视组件，目标表
           width: 60,
           height: 60,
-          x: Math.random() * this.state.width,
-          y: Math.random() * this.state.height,
+          x: Math.random() * width - 60,
+          y: Math.random() * this.state.height - 60,
           circleRadius: 5,
           title: uuid(7, 16),
           index: 0,
@@ -81,8 +82,7 @@ class GenerateDiagram extends Component {
     this.outerSvgRegion = d3.select("#model-svg-id");
     this.outerRegionWrap = this.outerSvgRegion
       .append("g")
-      .attr("id", "box-svg-id")
-      .attr("fill", "url(#diagramPattern)");
+      .attr("id", "box-svg-id");
     this.outerRegionWrap
       .append("rect")
       .attr("width", this.state.width)
@@ -96,7 +96,7 @@ class GenerateDiagram extends Component {
     this.outerRegion = this.outerPathAndNodes.append("g");
     let $outerRegion = this.outerPathAndNodes;
     /*** 绘制箭头 ***/
-    let outerDefs = this.outerRegionWrap.append("defs");
+    let outerDefs = this.outerSvgRegion.append("defs");
     outerDefs
       .append("marker")
       .attr("id", "arrowEnd")
@@ -172,6 +172,14 @@ class GenerateDiagram extends Component {
           .on("drag", this.fixedTableDragIng)
           .on("end", this.fixedTableDragEnd)
       );
+    this.outerSvgRegion
+      .insert("g", "#box-svg-id")
+      .attr("id", "box-svg-bg")
+      .attr("fill", "url(#diagramPattern)")
+      .append("rect")
+      .attr("id", "box-svg-bg-id")
+      .attr("width", this.state.width)
+      .attr("height", this.state.height);
     /*** 放大缩小 ***/
     function svgZoomed(event, d) {
       $outerRegion.attr("transform", event.transform);
@@ -420,7 +428,12 @@ class GenerateDiagram extends Component {
             height: this.state.height,
           }}
         >
-          <svg className="model-svg" id="model-svg-id"></svg>
+          <svg
+            width={this.state.width}
+            height={this.state.height}
+            className="model-svg"
+            id="model-svg-id"
+          ></svg>
         </div>
         <button
           type="submit"
