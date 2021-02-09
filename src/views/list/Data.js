@@ -74,10 +74,21 @@ class App extends React.Component {
       .force("x", d3.forceX())
       .force("y", d3.forceY());
 
-    const svg = d3
-      .select("#svg-id")
-      .attr("viewBox", [-width / 2, -height / 2, width, height]);
-    const g = svg.append("g").attr("cursor", "grab");
+    const svg = d3.select("#svg-id").attr("viewBox", [0, 0, width, height]);
+
+    svg
+      .insert("g")
+      .attr("id", "box-svg-bg")
+      .attr("fill", "url(#diagramPattern)")
+      .append("rect")
+      .attr("id", "box-svg-bg-id")
+      .attr("width", width)
+      .attr("height", height);
+
+    const g = svg
+      .append("g")
+      .attr("cursor", "grab")
+      .attr("transform", `translate(${width / 2},${height / 2})`);
 
     const link = g
       .append("g")
@@ -148,15 +159,44 @@ class App extends React.Component {
     function zoomed({ transform }) {
       g.attr("transform", transform);
     }
+
+    /* 网格 */
+    let outerDefs = svg.append("defs");
+    const gridArr = new Array(20);
+    this.bgRegion = outerDefs
+      .append("pattern")
+      .attr("id", "diagramPattern")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 100)
+      .attr("height", 100)
+      .attr("patternUnits", "userSpaceOnUse");
+    this.bgRegion
+      .selectAll("path")
+      .data(gridArr)
+      .enter()
+      .append("path")
+      .attr("stroke", "#e0e0e0")
+      .attr("stroke-width", "0.25")
+      .attr("dashArray", "")
+      .attr("d", (d, index) => {
+        if (index === 0) {
+          return `M0,0.5 L100,0.5 Z`;
+        } else if (index < 10 && index > 0) {
+          return `M0,${index * 10}.125 L100,${index * 10}.125 Z`;
+        } else if (index === 10) {
+          return `M0.5,0 L0.5,100 Z`;
+        } else if (index > 10) {
+          return `M${(index - 10) * 10}.125,0 L${(index - 10) * 10}.125,100 Z`;
+        }
+      });
   }
 
   render() {
     return (
       <div className="data-wrap">
         <div>
-          <svg id="svg-id">
-            <path className="paths" d={this.state.path}></path>
-          </svg>
+          <svg id="svg-id"></svg>
         </div>
       </div>
     );

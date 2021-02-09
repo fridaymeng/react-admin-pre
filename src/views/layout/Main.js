@@ -51,7 +51,7 @@ const Child = ({ route }) => (
         <Content
           className="site-layout-background"
           style={{
-            padding: 24,
+            padding: 15,
             margin: 0,
             minHeight: 900,
           }}

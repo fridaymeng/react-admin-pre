@@ -5,12 +5,90 @@ import { uuid } from "../utils/uuid";
 import { resize } from "../utils/resize";
 import { getBodySize } from "../utils/getBodySize";
 import "./Connection.scss";
+
+const width = window.screen.width;
+const height = window.screen.height;
+
+const items = [
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 4,
+    y: height / 2,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 0,
+    fixed: false,
+  },
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 2,
+    y: height / 2,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 1,
+    fixed: false,
+  },
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 2,
+    y: height / 2 + 60 * 2,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 1,
+    fixed: false,
+  },
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 2,
+    y: height / 2 + 60 * 4,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 1,
+    fixed: false,
+  },
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 2,
+    y: height / 2 - 60 * 4,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 1,
+    fixed: false,
+  },
+  {
+    id: uuid(16, 16),
+    type: "table", //表，过滤组件，关联组件，透视组件，目标表
+    width: 60,
+    height: 60,
+    x: width / 2,
+    y: height / 2 - 60 * 2,
+    circleRadius: 5,
+    title: uuid(7, 16),
+    index: 1,
+    fixed: false,
+  },
+];
 class GenerateDiagram extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: document.body.clientWidth,
-      height: 600,
+      width: window.screen.width,
+      height: window.screen.height,
       tableWidth: 60, //组件宽度
       tableHeight: 60, //组件高度
       circleRadius: 5, //小圆半径
@@ -21,53 +99,12 @@ class GenerateDiagram extends Component {
     this.sortByClick = this.sortByClick.bind(this);
   }
   componentDidMount() {
-    const width =
-      document.body.clientWidth -
-      Number.parseInt(
-        document.querySelector(".ant-layout-sider").style["width"]
-      ) -
-      50;
+    const item0 = items[0];
+    const item1 = items[1];
     this.setState({
-      width,
-      items: [
-        {
-          id: uuid(16, 16),
-          type: "table", //表，过滤组件，关联组件，透视组件，目标表
-          width: 60,
-          height: 60,
-          x: Math.random() * width - 60,
-          y: Math.random() * this.state.height - 60,
-          circleRadius: 5,
-          title: uuid(7, 16),
-          index: 0,
-          fixed: false,
-        },
-        {
-          id: uuid(16, 16),
-          type: "table", //表，过滤组件，关联组件，透视组件，目标表
-          width: 60,
-          height: 60,
-          x: Math.random() * this.state.width,
-          y: Math.random() * this.state.height,
-          circleRadius: 5,
-          title: uuid(7, 16),
-          index: 1,
-          fixed: false,
-        },
-        {
-          id: uuid(16, 16),
-          type: "table", //表，过滤组件，关联组件，透视组件，目标表
-          width: 60,
-          height: 60,
-          x: Math.random() * this.state.width,
-          y: Math.random() * this.state.height,
-          circleRadius: 5,
-          title: uuid(7, 16),
-          index: 1,
-          fixed: false,
-        },
-      ],
+      items: items,
     });
+
     let $this = this;
     /* 注册resize */
     EventEmitter.off("resizeSvg");
@@ -79,7 +116,19 @@ class GenerateDiagram extends Component {
         .attr("height", data.height)
         .attr("width", data.width);
     });
-    this.outerSvgRegion = d3.select("#model-svg-id");
+    this.outerSvgRegion = d3
+      .select("#model-svg-id")
+      .attr("viewBox", [0, 0, this.state.width, this.state.height]);
+
+    this.outerSvgRegion
+      .insert("g")
+      .attr("id", "box-svg-bg")
+      .attr("fill", "url(#diagramPattern)")
+      .append("rect")
+      .attr("id", "box-svg-bg-id")
+      .attr("width", this.state.width)
+      .attr("height", this.state.height);
+
     this.outerRegionWrap = this.outerSvgRegion
       .append("g")
       .attr("id", "box-svg-id");
@@ -92,6 +141,21 @@ class GenerateDiagram extends Component {
     this.outerPathAndNodes = this.outerRegionWrap.append("g");
     /* 所有连接线区域 */
     this.outerAllPathRegion = this.outerPathAndNodes.append("g");
+    renderLines({
+      region: this.outerAllPathRegion,
+      relation: [
+        {
+          x1: item0.x + 60,
+          y1: item0.y + 60 / 2,
+          x2: item1.x,
+          y2: item1.y + 60 / 2,
+          startId: item0.id,
+          startCircleIndex: 0,
+          endId: item1.id,
+          endCircleIndex: 1,
+        },
+      ],
+    });
     /* 组件节点 */
     this.outerRegion = this.outerPathAndNodes.append("g");
     let $outerRegion = this.outerPathAndNodes;
@@ -172,14 +236,6 @@ class GenerateDiagram extends Component {
           .on("drag", this.fixedTableDragIng)
           .on("end", this.fixedTableDragEnd)
       );
-    this.outerSvgRegion
-      .insert("g", "#box-svg-id")
-      .attr("id", "box-svg-bg")
-      .attr("fill", "url(#diagramPattern)")
-      .append("rect")
-      .attr("id", "box-svg-bg-id")
-      .attr("width", this.state.width)
-      .attr("height", this.state.height);
     /*** 放大缩小 ***/
     function svgZoomed(event, d) {
       $outerRegion.attr("transform", event.transform);
@@ -421,19 +477,8 @@ class GenerateDiagram extends Component {
   render() {
     return (
       <div className="wrap">
-        <div
-          className="model-svg-wrap"
-          style={{
-            width: this.state.width,
-            height: this.state.height,
-          }}
-        >
-          <svg
-            width={this.state.width}
-            height={this.state.height}
-            className="model-svg"
-            id="model-svg-id"
-          ></svg>
+        <div className="model-svg-wrap">
+          <svg className="model-svg" id="model-svg-id"></svg>
         </div>
         <button
           type="submit"

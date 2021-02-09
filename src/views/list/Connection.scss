@@ -9,14 +9,14 @@
   }
 }
 .wrap {
-  padding: 5px;
+  padding: 0;
 }
 .model-svg-wrap {
   position: relative;
   overflow: hidden;
   background: #fff;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   text-anchor: start;
   .model-svg {
     width: 100%;
@@ -45,10 +45,10 @@
         fill: none;
         stroke: #111;
         stroke-width: 1.5px;
-        /* stroke-dasharray: 10;
+        stroke-dasharray: 10;
         stroke-dashoffset: 50;
-        -webkit-animation: dash .3s linear infinite;
-        animation: dash .3s linear infinite; */
+        -webkit-animation: dash 0.3s linear infinite;
+        animation: dash 0.3s linear infinite;
       }
     }
     g.tableComponet {
