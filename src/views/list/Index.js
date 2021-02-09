@@ -1,5 +1,4 @@
 import React from "react";
-import * as d3 from "d3";
 import { Statistic, Card, Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import "./Index.scss";

@@ -1,11 +1,7 @@
 import { renderRoutes } from "react-router-config";
 import { Link } from "react-router-dom";
-import { Layout, Menu } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import "./Main.scss";
 
 const { Header, Sider, Content } = Layout;
@@ -15,15 +11,20 @@ const { SubMenu } = Menu;
 const Child = ({ route }) => (
   <div>
     <Layout>
-      <Header>
+      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
         <div className="logo" />
+        <div className="login-out">
+          <Button type="primary">
+            <Link to="/">退出</Link>
+          </Button>
+        </div>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
         </Menu>
       </Header>
-      <Layout>
+      <Layout style={{ padding: "0 0", marginTop: 64 }}>
         <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
@@ -36,26 +37,10 @@ const Child = ({ route }) => (
                 <Link to="/app/list">Dashbord</Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to="/app/data">data</Link>
+                <Link to="/app/data">Nodes Data</Link>
               </Menu.Item>
               <Menu.Item key="3">option3</Menu.Item>
               <Menu.Item key="4">option4</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              icon={<NotificationOutlined />}
-              title="subnav 3"
-            >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
