@@ -1,6 +1,7 @@
 .list-wrap {
   padding: 0;
-  path.paths {
+  path.paths,
+  line.link {
     stroke: #08c;
     stroke-width: 1px;
     fill: none;
@@ -8,5 +9,8 @@
   svg.path-wrap {
     width: 100%;
     height: 210px;
+  }
+  circle.node {
+    fill: #08c;
   }
 }

@@ -77,8 +77,9 @@ class App extends React.Component {
     const svg = d3
       .select("#svg-id")
       .attr("viewBox", [-width / 2, -height / 2, width, height]);
+    const g = svg.append("g").attr("cursor", "grab");
 
-    const link = svg
+    const link = g
       .append("g")
       .attr("stroke", "#999")
       .attr("stroke-opacity", 0.6)
@@ -87,7 +88,7 @@ class App extends React.Component {
       .join("line")
       .attr("stroke-width", (d) => Math.sqrt(d.value));
 
-    const node = svg
+    const node = g
       .append("g")
       .attr("stroke", "#fff")
       .attr("stroke-width", 1.5)
@@ -96,7 +97,14 @@ class App extends React.Component {
       .join("circle")
       .attr("r", 5)
       .attr("fill", "#08c")
-      .call(drag(simulation));
+      .call(drag(simulation))
+      .call(
+        d3
+          .drag()
+          .on("start", dragstarted)
+          .on("drag", svgDragged)
+          .on("end", dragended)
+      );
 
     node.append("title").text((d) => {
       return d.index;
@@ -111,8 +119,35 @@ class App extends React.Component {
 
       node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
     });
+    svg.call(
+      d3
+        .zoom()
+        .extent([
+          [0, 0],
+          [width, height],
+        ])
+        .scaleExtent([1, 8])
+        .on("zoom", zoomed)
+    );
 
-    return svg.node();
+    function dragstarted() {
+      d3.select(this).raise();
+      g.attr("cursor", "grabbing");
+    }
+
+    function svgDragged(event, d) {
+      d3.select(this)
+        .attr("cx", (d.x = event.x))
+        .attr("cy", (d.y = event.y));
+    }
+
+    function dragended() {
+      g.attr("cursor", "grab");
+    }
+
+    function zoomed({ transform }) {
+      g.attr("transform", transform);
+    }
   }
 
   render() {

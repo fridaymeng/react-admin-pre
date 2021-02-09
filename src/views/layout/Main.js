@@ -39,7 +39,9 @@ const Child = ({ route }) => (
               <Menu.Item key="2">
                 <Link to="/app/data">Nodes Data</Link>
               </Menu.Item>
-              <Menu.Item key="3">option3</Menu.Item>
+              <Menu.Item key="3">
+                <Link to="/app/datav3">datav3</Link>
+              </Menu.Item>
               <Menu.Item key="4">option4</Menu.Item>
             </SubMenu>
           </Menu>

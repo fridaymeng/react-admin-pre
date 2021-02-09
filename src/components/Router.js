@@ -6,6 +6,7 @@ import MainLayout from "../views/layout/Main";
 import Page404 from "./404";
 import App from "../views/list/Index";
 import Data from "../views/list/Data";
+import DataV3 from "../views/list/DataV3";
 const routes = [
   {
     path: "/",
@@ -23,6 +24,10 @@ const routes = [
       {
         path: "/app/data",
         component: Data,
+      },
+      {
+        path: "/app/datav3",
+        component: DataV3,
       },
     ],
   },
