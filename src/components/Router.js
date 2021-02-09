@@ -7,6 +7,7 @@ import Page404 from "./404";
 import App from "../views/list/Index";
 import Data from "../views/list/Data";
 import DataV3 from "../views/list/DataV3";
+import Connection from "../views/list/Connection";
 const routes = [
   {
     path: "/",
@@ -28,6 +29,10 @@ const routes = [
       {
         path: "/app/datav3",
         component: DataV3,
+      },
+      {
+        path: "/app/connection",
+        component: Connection,
       },
     ],
   },

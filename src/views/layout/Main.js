@@ -42,7 +42,9 @@ const Child = ({ route }) => (
               <Menu.Item key="3">
                 <Link to="/app/datav3">datav3</Link>
               </Menu.Item>
-              <Menu.Item key="4">option4</Menu.Item>
+              <Menu.Item key="4">
+                <Link to="/app/connection">connection</Link>
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
