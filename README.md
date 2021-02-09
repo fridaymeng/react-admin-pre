@@ -1,4 +1,8 @@
-# 项目使用了自动代码格式化工具 pretty-quick
+```js
+因为antd提供的pro系统太重了，简单改一行代码加载不少时间。因此自己做了一个简单的，并收录一些常用的功能。
+```
+
+### 项目使用了自动代码格式化工具 pretty-quick
 
 # Getting Started with Create React App
 
