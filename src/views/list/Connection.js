@@ -7,7 +7,7 @@ import { getBodySize } from "../utils/getBodySize";
 import "./Connection.scss";
 
 const width = window.screen.width;
-const height = window.screen.height;
+const height = window.screen.height - 150;
 
 const items = [
   {
@@ -99,6 +99,10 @@ class GenerateDiagram extends Component {
     this.sortByClick = this.sortByClick.bind(this);
   }
   componentDidMount() {
+    this.draw();
+  }
+
+  draw() {
     const item0 = items[0];
     const item1 = items[1];
     this.setState({
@@ -242,6 +246,7 @@ class GenerateDiagram extends Component {
     }
     this.updateTableList();
   }
+
   componentDidUpdate() {
     this.updateTableList();
   }
