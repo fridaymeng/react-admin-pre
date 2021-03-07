@@ -1,10 +1,10 @@
 ```js
-因为antd提供的pro系统太重了，简单改一行代码刷新都需要很多时间。因此自己做了一个简单的，并收录一些常用的功能。
+因为antd提供的pro系统太重了，简单改一行代码刷新都需要很多时间。因此自己做了一个轻量简单的，并收录一些常用的功能。
 ```
 
 ![example](/src/assets/img/connetion.jpg)
 
-### 项目使用了自动代码格式化工具 pretty-quick
+### 项目使用了代码自动格式化工具 pretty-quick
 
 # Getting Started with Create React App
 
