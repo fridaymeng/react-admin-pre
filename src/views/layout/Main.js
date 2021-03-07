@@ -12,7 +12,7 @@ const Child = ({ route }) => (
   <div>
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <div className="logo" />
+        <div className="logo">Pro Management</div>
         <div className="login-out">
           <Button type="primary">
             <Link to="/">退出</Link>
