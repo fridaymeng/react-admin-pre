@@ -4,7 +4,7 @@ import EventEmitter from "utils/events";
 import { uuid } from "utils/uuid";
 import { resize } from "utils/resize";
 import { getBodySize } from "utils/getBodySize";
-import styles from "./connection.scss";
+import "./connection.scss";
 
 const width = window.screen.width;
 const height = window.screen.height - 150;
@@ -485,7 +485,7 @@ class GenerateDiagram extends Component {
   };
   render() {
     return (
-      <div className={styles.wrap}>
+      <div className="connectionWrap">
         <div className="model-svg-wrap">
           <svg className="model-svg" id="model-svg-id"></svg>
         </div>
