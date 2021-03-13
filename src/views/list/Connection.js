@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
-import EventEmitter from "../utils/events";
-import { uuid } from "../utils/uuid";
-import { resize } from "../utils/resize";
-import { getBodySize } from "../utils/getBodySize";
-import "./Connection.scss";
+import EventEmitter from "utils/events";
+import { uuid } from "utils/uuid";
+import { resize } from "utils/resize";
+import { getBodySize } from "utils/getBodySize";
+import "./connection.scss";
 
 const width = window.screen.width;
-const height = window.screen.height;
+const height = window.screen.height - 150;
 
 const items = [
   {
@@ -99,6 +99,10 @@ class GenerateDiagram extends Component {
     this.sortByClick = this.sortByClick.bind(this);
   }
   componentDidMount() {
+    this.draw();
+  }
+
+  draw() {
     const item0 = items[0];
     const item1 = items[1];
     this.setState({
@@ -173,6 +177,7 @@ class GenerateDiagram extends Component {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
+      .attr("name", "pathArrow")
       .attr("class", "pathArrow");
     outerDefs
       .append("marker")
@@ -186,6 +191,7 @@ class GenerateDiagram extends Component {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M10,2 L2,6 L10,10 L6,6 L10,2")
+      .attr("name", "pathArrow")
       .attr("class", "pathArrow");
     /* 网格 */
     const gridArr = new Array(20);
@@ -221,6 +227,7 @@ class GenerateDiagram extends Component {
       .append("path")
       .attr("class", "unrestrainedPath")
       .attr("id", "unrestrainedPathId")
+      .attr("name", "unrestrainedPath")
       .attr("marker-end", "url(#arrowEnd)")
       .attr("marker-start", "url(#arrowStart)")
       .attr("d", "M0,0 0,0");
@@ -242,6 +249,7 @@ class GenerateDiagram extends Component {
     }
     this.updateTableList();
   }
+
   componentDidUpdate() {
     this.updateTableList();
   }
@@ -340,6 +348,7 @@ class GenerateDiagram extends Component {
         /*** 固定连接线 ***/
         this.outerFixedTableRegion
           .append("path")
+          .attr("name", "path")
           .attr("class", "linkConnect")
           .attr("d", (d) => {
             let $str = "";
@@ -476,7 +485,7 @@ class GenerateDiagram extends Component {
   };
   render() {
     return (
-      <div className="wrap">
+      <div className="connectionWrap">
         <div className="model-svg-wrap">
           <svg className="model-svg" id="model-svg-id"></svg>
         </div>
@@ -530,6 +539,7 @@ function renderLines(params) {
     .data(params.relation)
     .enter()
     .append("path")
+    .attr("name", "path")
     .attr("class", (d) => {
       return `nodeConnect start-${d.startId} end-${d.endId}`;
     })

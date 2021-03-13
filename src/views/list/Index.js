@@ -1,7 +1,6 @@
 import React from "react";
 import { Statistic, Card, Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
-import "./Index.scss";
 
 const { Countdown } = Statistic;
 class HelloMessage extends React.Component {
@@ -36,7 +35,7 @@ class HelloMessage extends React.Component {
 
   render() {
     return (
-      <div className="list-wrap">
+      <div>
         <div className="site-statistic-demo-card">
           <Row gutter={16}>
             <Col span={6}>
@@ -82,11 +81,6 @@ class HelloMessage extends React.Component {
               </Card>
             </Col>
           </Row>
-        </div>
-        <div>
-          <svg className="path-wrap">
-            <path className="paths" d={this.state.path}></path>
-          </svg>
         </div>
       </div>
     );

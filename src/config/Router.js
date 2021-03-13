@@ -1,13 +1,13 @@
 import { renderRoutes } from "react-router-config";
 import { BrowserRouter } from "react-router-dom"; //BrowserRouter, HashRouter
 
-import Login from "../views/login/Index";
-import MainLayout from "../views/layout/Main";
-import Page404 from "./404";
-import App from "../views/list/Index";
-import Data from "../views/list/Data";
-import DataV3 from "../views/list/DataV3";
-import Connection from "../views/list/Connection";
+import Login from "views/login/Index";
+import MainLayout from "layout/Main";
+import Page404 from "views/error/Page404";
+import App from "views/list/Index";
+import Data from "views/list/Data";
+import DataV3 from "views/list/DataV3";
+import Connection from "views/list/Connection";
 const routes = [
   {
     path: "/",
@@ -34,10 +34,15 @@ const routes = [
         path: "/app/connection",
         component: Connection,
       },
+      {
+        path: "*",
+        exact: true,
+        component: Page404,
+      },
     ],
   },
   {
-    path: "/404",
+    path: "*",
     exact: true,
     component: Page404,
   },
