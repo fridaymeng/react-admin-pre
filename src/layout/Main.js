@@ -2,7 +2,7 @@ import { renderRoutes } from "react-router-config";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import "./Main.scss";
+import styles from "./Main.module.scss";
 
 const { Header, Sider, Content } = Layout;
 
@@ -12,8 +12,8 @@ const Child = ({ route }) => (
   <div>
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <div className="logo">Pro Management</div>
-        <div className="login-out">
+        <div className={styles.logo}>Pro Management</div>
+        <div className={styles.loginOut}>
           <Button type="primary">
             <Link to="/">退出</Link>
           </Button>

@@ -1,6 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
-import "./Index.scss";
+import styles from "./index.module.scss";
 
 class App extends React.Component {
   constructor(props) {
@@ -179,7 +179,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="data-wrap">
+      <div className={styles.dataWrap}>
         <div>
           <svg id="svg-id"></svg>
         </div>
