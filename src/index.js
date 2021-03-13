@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
-import "./assets/scss/reset.scss";
-import Router from "./components/Router";
-import reportWebVitals from "./reportWebVitals";
+import "assets/scss/reset.scss";
+import Router from "config/Router";
+// import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,4 +15,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
