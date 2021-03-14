@@ -1,90 +1,82 @@
-import React from "react";
-import { Statistic, Card, Row, Col } from "antd";
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import { Table, Tag, Space } from "antd";
 
-const { Countdown } = Statistic;
-class HelloMessage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-      active: 0,
-      idle: 0,
-      deadline: Date.now() + 1000 * 60 * 60 * 24 * 1,
-      data: [],
-      path: "",
-    };
-  }
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+  {
+    title: "Tags",
+    key: "tags",
+    dataIndex: "tags",
+    render: (tags) => (
+      <>
+        {tags.map((tag) => {
+          let color = tag.length > 5 ? "geekblue" : "green";
+          if (tag === "loser") {
+            color = "volcano";
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: "Action",
+    key: "action",
+    render: (text, record) => (
+      <Space size="middle">
+        <a>Invite {record.name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+];
 
-  tick() {
-    const value = (Math.random() * 100).toFixed(2);
-    this.setState((state) => ({
-      count: state.count + 1,
-      active: value,
-      idle: 100 - value,
-    }));
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="site-statistic-demo-card">
-          <Row gutter={16}>
-            <Col span={6}>
-              <Card>
-                <Statistic
-                  title="Active"
-                  value={this.state.active}
-                  precision={2}
-                  valueStyle={{ color: "#3f8600" }}
-                  prefix={<ArrowUpOutlined />}
-                  suffix="%"
-                />
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card>
-                <Statistic
-                  title="Idle"
-                  value={this.state.idle}
-                  precision={2}
-                  valueStyle={{ color: "#cf1322" }}
-                  prefix={<ArrowDownOutlined />}
-                  suffix="%"
-                />
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card>
-                <Statistic
-                  title="Count"
-                  value={this.state.count}
-                  valueStyle={{ color: "#111" }}
-                />
-              </Card>
-            </Col>
-            <Col span={6}>
-              <Card>
-                <Countdown
-                  format="HH:mm:ss:SSS"
-                  title="Deadline"
-                  value={this.state.deadline}
-                />
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </div>
-    );
-  }
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    age: 32,
+    address: "New York No. 1 Lake Park",
+    tags: ["nice", "developer"],
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    age: 42,
+    address: "London No. 1 Lake Park",
+    tags: ["loser"],
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
+  },
+];
+function App(props) {
+  return (
+    <div>
+      <Table columns={columns} dataSource={data} />
+    </div>
+  );
 }
-
-export default HelloMessage;
+export default App;

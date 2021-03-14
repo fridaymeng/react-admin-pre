@@ -34,16 +34,19 @@ const Child = ({ route }) => (
           >
             <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
               <Menu.Item key="1">
-                <Link to="/app/list">Dashbord</Link>
+                <Link to="/app/dashboard">Dashboard</Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to="/app/data">Nodes Data</Link>
+                <Link to="/app/list">List</Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <Link to="/app/datav3">datav3</Link>
+                <Link to="/app/data">Nodes Data</Link>
               </Menu.Item>
               <Menu.Item key="4">
-                <Link to="/app/connection">connection</Link>
+                <Link to="/app/datav3">Nodes Data2</Link>
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/app/connection">Connection</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>

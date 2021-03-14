@@ -4,7 +4,7 @@ import EventEmitter from "utils/events";
 import { uuid } from "utils/uuid";
 import { resize } from "utils/resize";
 import { getBodySize } from "utils/getBodySize";
-import "./connection.scss";
+import "./index.scss";
 
 const width = window.screen.width;
 const height = window.screen.height - 150;
