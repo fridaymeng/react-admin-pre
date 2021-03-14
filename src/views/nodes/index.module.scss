@@ -1,0 +1,19 @@
+.dataWrap {
+  padding: 0;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  path[class="paths"],
+  line[class="link"] {
+    stroke: #08c;
+    stroke-width: 1px;
+    fill: none;
+  }
+  svg[class="path-wrap"] {
+    width: 100%;
+    height: 210px;
+  }
+  circle[class="node"] {
+    fill: #08c;
+  }
+}

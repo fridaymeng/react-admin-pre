@@ -4,10 +4,11 @@ import { BrowserRouter } from "react-router-dom"; //BrowserRouter, HashRouter
 import Login from "views/login/Index";
 import MainLayout from "layout/Main";
 import Page404 from "views/error/Page404";
-import App from "views/list/Index";
-import Data from "views/list/Data";
-import DataV3 from "views/list/DataV3";
-import Connection from "views/list/Connection";
+import dashboard from "views/dashboard/Index";
+import List from "views/list/Index";
+import Data from "views/nodes/Data";
+import DataV3 from "views/nodes/DataV3";
+import Connection from "views/connection/Index";
 const routes = [
   {
     path: "/",
@@ -19,8 +20,12 @@ const routes = [
     component: MainLayout,
     routes: [
       {
+        path: "/app/dashboard",
+        component: dashboard,
+      },
+      {
         path: "/app/list",
-        component: App,
+        component: List,
       },
       {
         path: "/app/data",
