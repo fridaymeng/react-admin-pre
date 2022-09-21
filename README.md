@@ -3,6 +3,8 @@
 ```
 
 ![example](/src/assets/img/connetion.jpg)
+![example](/src/assets/img/2.png)
+![example](/src/assets/img/3.png)
 
 ### 项目使用了代码自动格式化工具 pretty-quick
 
