@@ -2,6 +2,9 @@ import React from "react";
 import { Statistic, Card, Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 
+import { Upload, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+
 const { Countdown } = Statistic;
 class HelloMessage extends React.Component {
   constructor(props) {
@@ -14,6 +17,7 @@ class HelloMessage extends React.Component {
       data: [],
       path: "",
     };
+    this.handleFile = this.handleFile.bind(this);
   }
 
   tick() {
@@ -31,6 +35,18 @@ class HelloMessage extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  handleFile(file) {
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(e.target.result);
+    };
+    // readAsBinaryString：按字节读取文件内容，结果用ArrayBuffer对象表示
+    // readAsArrayBuffer：按字节读取文件内容，结果为文件的二进制串
+    // readAsDataURL：读取文件内容，结果用data:url的字符串形式表示
+    // readAsText：按字符读取文件内容，结果用字符串形式表示
+    fileReader.readAsArrayBuffer(file);
   }
 
   render() {
@@ -81,6 +97,17 @@ class HelloMessage extends React.Component {
               </Card>
             </Col>
           </Row>
+          <div
+            style={{
+              background: "#fff",
+              padding: "20px",
+              margin: "10px 0 0 0",
+            }}
+          >
+            <Upload beforeUpload={this.handleFile}>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+          </div>
         </div>
       </div>
     );
